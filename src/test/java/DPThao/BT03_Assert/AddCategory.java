@@ -26,12 +26,13 @@ public class AddCategory extends BaseTest {
         //Menu Dashboard
         // Check text menu Products
         String checkTextMenuProducts = driver.findElement(By.xpath(LocatorCMS.menuProducts)).getText();
-        softAssert.assertEquals(checkTextMenuProducts, "Products123", "Giá trị menu Products không đúng");
+        softAssert.assertEquals(checkTextMenuProducts, "Products", "Giá trị menu Products không đúng");
         driver.findElement(By.xpath(LocatorCMS.menuProducts)).click();
 
         // Check text menu Category
         String checkTextMenuCategory = driver.findElement(By.xpath(LocatorCMS.menuCategory)).getText();
-        softAssert.assertEquals(checkTextMenuCategory, "Category123", "Giá trị menu Category không đúng");
+        sleep(2);
+        softAssert.assertEquals(checkTextMenuCategory, "Category", "Giá trị menu Category không đúng");
         driver.findElement(By.xpath(LocatorCMS.menuCategory)).click();
 
         // Check display and enable button Add New Category
@@ -82,12 +83,18 @@ public class AddCategory extends BaseTest {
 
         driver.findElement(By.xpath(LocatorCMS.buttonSaveAddCategory)).click();
 
+        // Check Add category successfully
+        boolean checkDisplayPopupAddCategorySuccess = driver.findElement(By.xpath(LocatorCMS.popupAddCategorySuccess)).isDisplayed();
+        softAssert.assertTrue(checkDisplayPopupAddCategorySuccess, "Không hiển thị popup Add Category Successfully");
+
+        String checkTextPopupAddCategorySuccess = driver.findElement(By.xpath(LocatorCMS.popupAddCategorySuccess)).getText();
+        softAssert.assertEquals(checkTextPopupAddCategorySuccess, "Category has been inserted successfully", "Giá trị hiển thị trong popup không đúng.");
+
         //Search Category added
         driver.findElement(By.xpath(LocatorCMS.searchCategory)).sendKeys(Category_Name);
         driver.findElement(By.xpath(LocatorCMS.searchCategory)).sendKeys(Keys.ENTER);
         sleep(3);
 
-        softAssert.assertAll();
 
         //Check Category added
 
@@ -95,6 +102,17 @@ public class AddCategory extends BaseTest {
 
         Assert.assertEquals(NameofCategory, Category_Name, "Giá trị Name của Category vừa thêm không đúng");
 
+        // Delete Category
+        driver.findElement(By.xpath(LocatorCMS.iconDeleteCategory)).click();
+        driver.findElement(By.xpath(LocatorCMS.buttonDeleteCategory)).click();
+
+
+        boolean checkDisplayPopupDeleteCategorySuccess = driver.findElement(By.xpath(LocatorCMS.popupDeleteCategorySuccess)).isDisplayed();
+        softAssert.assertTrue(checkDisplayPopupDeleteCategorySuccess, "Không hiển thị popup Delete Category Successfully");
+        String checkTextPopupDeleteCategorySuccess = driver.findElement(By.xpath(LocatorCMS.popupDeleteCategorySuccess)).getText();
+        softAssert.assertEquals(checkTextPopupDeleteCategorySuccess, "Category has been deleted successfully", "Giá trị hiển thị trong popup không đúng.");
+
+        softAssert.assertAll();
 
     }
 

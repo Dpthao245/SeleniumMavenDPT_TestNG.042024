@@ -21,6 +21,12 @@ public class LocatorCMS {
     public static String firstItemOnCategoryTable ="//tbody/tr[1]/td[2]";
     public static String popupAddCategorySuccess = "//div[@class='aiz-notify alert alert-success']";
 
+    public static String iconDeleteCategory = "//a[@title = 'Delete']";
+    public static String popupDeleteCategorySuccess = "//div[@class='aiz-notify alert alert-success']"; // Category has been deleted successfully
+
+    // Popup Delete information
+    public static String buttonDeleteCategory = "//a[@id= 'delete-link']";
+
 
     //Category Information
     public static String inputName = "//input[@id='name']";

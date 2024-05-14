@@ -6,19 +6,23 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
 public class BaseTest {
     public WebDriver driver;
-    @BeforeMethod
+    //@BeforeMethod
     public void createBrowser(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }
-    public void createBrowser(String browserName) {
+    @BeforeMethod
+    @Parameters ("browser")
+    public void createBrowser(@Optional ("chrome") String browserName) {
         if(browserName.equals("chrome")){
             driver = new ChromeDriver();
         }
